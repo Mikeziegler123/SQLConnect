@@ -1,4 +1,4 @@
-﻿// Michael Ziegler    |    SQLCOMMANDTEST    |    JEWELRY E-DISPLAY SQLDRIVER    |    C# Programming Language
+// Michael Ziegler    |     PROJECT: E-DISPLAY/SQLCONNECT     |     FILE: SQLCONNECT.CS    |    LANGUAGE: C#
 using System;
 using System.Text;
 using System.Data.SqlClient;
@@ -13,8 +13,9 @@ namespace SqlServerSample
             {
                 // Build connection string
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "DESKTOP-U97Q6P0\\SQLEXPRESS";   // update me
-                builder.IntegratedSecurity = true;      // update me
+                builder.DataSource = "192.168.1.178,1433";
+                builder.UserID = "AS";
+                builder.Password = "abc123";
                 builder.InitialCatalog = "DATA";
 
                 // Connect to SQL
@@ -33,7 +34,7 @@ namespace SqlServerSample
                         Console.WriteLine("Complete.");
                     }
 
-                    // Create a Table and insert test data
+                    // Create new table and propegate cells with new data
                     Console.Write("Creating new Diamond Table ...");
                     Console.ReadKey(true);
                     StringBuilder sb = new StringBuilder();
@@ -75,13 +76,12 @@ namespace SqlServerSample
                         Console.WriteLine(" Done.");
                     }
 
-                    // READ demo
+                    // Read Data from server(SQL Query), write to console.
                     Console.WriteLine("Reading data from table, press any key to continue...");
                     Console.ReadKey(true);
                     sql = "SELECT * FROM Diamonds;";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -96,7 +96,6 @@ namespace SqlServerSample
             {
                 Console.WriteLine(e.ToString());
             }
-
             Console.WriteLine("All done. Press any key to finish...");
             Console.ReadKey(true);
         }
