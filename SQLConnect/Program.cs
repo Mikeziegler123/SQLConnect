@@ -75,7 +75,7 @@ namespace SqlServerSample
                         Console.WriteLine(" Done.");
                     }
 
-                    // READ demo
+                    // READ TO CONSOLE
                     Console.WriteLine("Reading data from table, press any key to continue...");
                     Console.ReadKey(true);
                     sql = "SELECT * FROM Diamonds;";
